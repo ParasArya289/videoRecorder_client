@@ -17,6 +17,8 @@
 .login-form label {
   display: flex;
   flex-direction: column;
+  font-size: 0.9rem;
+  font-weight: var(--fw-medium);
   gap: 0.2rem;
 }
 .login-form label > input {
