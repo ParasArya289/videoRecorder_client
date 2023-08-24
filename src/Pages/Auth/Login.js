@@ -1,9 +1,19 @@
-import { useRef } from "react";
-import { loginUser } from "../../Helpers/authHelpers";
+import { useEffect, useRef } from "react";
+import { useNavigate } from "react-router-dom";
+import { useAuth } from "../../Context/authContext";
 import "./Login.css";
 
 export const Login = () => {
+  const { loginUser, token } = useAuth();
   const formRef = useRef(null);
+
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (token) {
+      navigate("/");
+    }
+  }, [token]);
 
   const loginHandler = (event) => {
     event.preventDefault();
@@ -16,15 +26,15 @@ export const Login = () => {
   return (
     <div className="login">
       <form ref={formRef} className="login-form" onSubmit={loginHandler}>
-        <h1 style={{margin:0}}>Signin</h1>
+        <h1 style={{ margin: 0 }}>Signin</h1>
         <label htmlFor="username">
           Username
-          <input type="text" name="username" placeholder="Username" required/>
+          <input type="text" name="username" placeholder="Username" required />
         </label>
 
         <label htmlFor="email">
           Email
-          <input type="email" name="email" placeholder="Email" required/>
+          <input type="email" name="email" placeholder="Email" required />
         </label>
 
         <button type="submit">Submit</button>

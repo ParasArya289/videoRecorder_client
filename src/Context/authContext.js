@@ -3,8 +3,10 @@ import { createContext, useContext, useState } from "react";
 const authContext = createContext();
 
 export const AuthContextProvider = ({ children }) => {
-  const [token, setToken] = useState("");
-  const [user, setUser] = useState({});
+  const tokenFromLocalStorage = localStorage.getItem("token");
+  const userFromLocalStorage = JSON.parse(localStorage.getItem("user"));
+  const [token, setToken] = useState(tokenFromLocalStorage);
+  const [user, setUser] = useState(userFromLocalStorage ?? {});
 
   const loginUser = async (credential) => {
     try {
@@ -21,6 +23,8 @@ export const AuthContextProvider = ({ children }) => {
       const { username, email, id, token } = await res.json();
       setToken(token);
       setUser({ username, email, id });
+      localStorage.setItem("token", token);
+      localStorage.setItem("user", JSON.stringify({ username, email, id }));
     } catch (error) {
       console.error(error);
     }
