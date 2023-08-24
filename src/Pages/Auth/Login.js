@@ -4,7 +4,7 @@ import { useAuth } from "../../Context/authContext";
 import "./Login.css";
 
 export const Login = () => {
-  const { loginUser, token } = useAuth();
+  const { loginUser, token, authLoading } = useAuth();
   const formRef = useRef(null);
 
   const navigate = useNavigate();
@@ -37,7 +37,9 @@ export const Login = () => {
           <input type="email" name="email" placeholder="Email" required />
         </label>
 
-        <button type="submit">Submit</button>
+        <button disabled={authLoading} type="submit">
+          {authLoading ? "Loading..." : "Submit"}
+        </button>
       </form>
     </div>
   );

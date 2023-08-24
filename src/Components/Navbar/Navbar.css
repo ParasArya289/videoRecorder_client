@@ -2,5 +2,8 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding-inline:20px ;
+  padding-inline: 20px;
+}
+.navbar > h4 {
+  color: var(--accent-color);
 }

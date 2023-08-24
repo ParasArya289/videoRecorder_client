@@ -7,9 +7,11 @@ export const AuthContextProvider = ({ children }) => {
   const userFromLocalStorage = JSON.parse(localStorage.getItem("user"));
   const [token, setToken] = useState(tokenFromLocalStorage);
   const [user, setUser] = useState(userFromLocalStorage ?? {});
+  const [authLoading, setAuthLoading] = useState(false);
 
   const loginUser = async (credential) => {
     try {
+      setAuthLoading(true);
       const res = await fetch(
         "https://videorecorder-backend-api.onrender.com/signin",
         {
@@ -27,11 +29,30 @@ export const AuthContextProvider = ({ children }) => {
       localStorage.setItem("user", JSON.stringify({ username, email, id }));
     } catch (error) {
       console.error(error);
+    } finally {
+      setAuthLoading(false);
     }
   };
 
+  const logoutUser = () => {
+    setToken("");
+    setUser({});
+    localStorage.removeItem("token");
+    localStorage.removeItem("user");
+  };
+
   return (
-    <authContext.Provider value={{ loginUser, token, user, setToken, setUser }}>
+    <authContext.Provider
+      value={{
+        loginUser,
+        token,
+        user,
+        authLoading,
+        setToken,
+        setUser,
+        logoutUser,
+      }}
+    >
       {children}
     </authContext.Provider>
   );
