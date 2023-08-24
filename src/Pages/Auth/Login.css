@@ -31,7 +31,7 @@
   border-radius: 4px;
   color: var(--primary-color);
 }
-.login-form button:is(:hover, :focus) {
+.login-form button:is(:hover) {
   background-color: grey;
-  transition: background-color 100ms linear;
+  transition: background-color 100ms ease;
 }
