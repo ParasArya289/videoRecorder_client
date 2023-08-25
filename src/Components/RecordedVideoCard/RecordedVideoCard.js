@@ -12,7 +12,6 @@ export const RecordedVideoCard = ({ ...props }) => {
     }
   }, [videoRef]);
 
-  console.log(props.title);
   const handlePlayVideoOnMouseOver = () => {
     videoRef.current.play();
   };
