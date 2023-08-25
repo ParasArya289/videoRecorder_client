@@ -1,5 +1,6 @@
 import { useEffect, useRef } from "react";
 import { BsDownload } from "react-icons/bs";
+import { RxCrossCircled } from "react-icons/rx";
 import "./RecordedVideoCard.css";
 
 export const RecordedVideoCard = ({ ...props }) => {
@@ -18,9 +19,6 @@ export const RecordedVideoCard = ({ ...props }) => {
   const handlePauseVideoOnMouseOver = () => {
     videoRef.current.pause();
   };
-  {
-    /* {recordedChunks.length > 0 && ( <div className="download"> <a href={URL.createObjectURL( new Blob(recordedChunks, { type: "video/webm", }) )} download="recorded-video.webm" > Download Recorded Video </a> <video controls> <source src={URL.createObjectURL( new Blob(recordedChunks, { mimeType: "video/webm;codecs=vp9,opus", }) )} type="video/webm" /> Your browser does not support the video tag. </video> </div> )} */
-  }
 
   return (
     <div className="videoCard">
@@ -39,7 +37,7 @@ export const RecordedVideoCard = ({ ...props }) => {
       <a href={URL.createObjectURL(props.vid)} download={`${props.title}.webm`}>
         <BsDownload />
       </a>
-      {/* <button></button> */}
+      <button><RxCrossCircled  style={{backgroundColor:"var(--primary-color)"}}/></button>
     </div>
   );
 };
