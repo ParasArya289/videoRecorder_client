@@ -1,0 +1,29 @@
+.videoCard {
+  min-width: 44.5%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  border: 2px solid var(--light-border);
+  border-radius: 6px;
+}
+.videoCard > div {
+  display: flex;
+  font-weight: var(--fw-medium);
+  gap: 10px;
+}
+.videoCard > div > span {
+  color: var(--secondary-text-color);
+}
+.videoCard video {
+  width: 40%;
+  height: auto;
+  border-radius: 4px;
+}
+.videoCard > button {
+  color: var(--secondary-text-color);   
+  cursor: pointer;
+  border: none;
+  background-color: transparent;
+  font-size: xx-large;
+}

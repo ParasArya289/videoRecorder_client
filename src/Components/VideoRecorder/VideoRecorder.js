@@ -63,12 +63,13 @@ export const VideoRecorder = () => {
   useEffect(() => {
     if (!isRecording && recordedChunks.length > 0) {
       const blob = new Blob(recordedChunks, {
-        mimeType: "video/webm;codecs=vp9,opus",
+        type: "video/webm",
       });
       dispatchRecording({
         type: "ADD_RECORDING",
         payload: {
           id: recordings.length,
+          title: `VIDEO-${recordings.length+1}`,
           vid: blob,
         },
       });
