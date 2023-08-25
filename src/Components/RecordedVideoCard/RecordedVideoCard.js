@@ -27,7 +27,7 @@ export const RecordedVideoCard = ({ ...props }) => {
       <div>
         <video
           ref={videoRef}
-          // controls
+          muted
           currentTime="1"
           onMouseOver={handlePlayVideoOnMouseOver}
           onMouseLeave={handlePauseVideoOnMouseOver}

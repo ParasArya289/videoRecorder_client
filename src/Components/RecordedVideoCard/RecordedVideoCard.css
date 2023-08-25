@@ -6,9 +6,10 @@
   padding: 20px;
   border: 2px solid var(--light-border);
   border-radius: 6px;
+  cursor: pointer;
 }
 .videoCard > div {
-  display: flex;    
+  display: flex;
   font-weight: var(--fw-medium);
   gap: 20px;
 }
@@ -19,12 +20,18 @@
   width: 40%;
   height: auto;
   border-radius: 4px;
+  transition: filter 0.5s ease;
 }
+
+.videoCard video:not(:hover) {
+  filter: grayscale(100%);
+}
+
 .videoCard > a {
   text-decoration: none;
   color: var(--secondary-text-color);
   cursor: pointer;
   border: none;
   background-color: transparent;
-  font-size: xx-large;
+  font-size: x-large;
 }
