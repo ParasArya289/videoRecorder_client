@@ -6,11 +6,11 @@ import "./VideoRecorder.css";
 const constraints = { video: { width: { max: 320 } }, audio: true };
 
 export const VideoRecorder = () => {
-  const mediaRecorderRef = useRef(null);
   const [isRecording, setIsRecording] = useState(false);
   const [recordedChunks, setRecordedChunks] = useState([]);
   const [isPermission, setIsPermission] = useState(true);
 
+  const mediaRecorderRef = useRef(null);
   const videoRef = useRef(null);
 
   const {
@@ -25,7 +25,7 @@ export const VideoRecorder = () => {
       setIsRecording(true);
       let video = videoRef.current;
       video.srcObject = stream;
-      video.play();
+      video?.play();
 
       const mediaRecorder = new MediaRecorder(stream);
       mediaRecorder.ondataavailable = (event) => {
@@ -47,16 +47,16 @@ export const VideoRecorder = () => {
       videoRef.current.play();
     } else {
       if (
-        mediaRecorderRef.current &&
+        mediaRecorderRef.current ||
         mediaRecorderRef.current.state === "recording"
       ) {
         mediaRecorderRef.current.stop();
         mediaRecorderRef.current.stream.getTracks().forEach((track) => {
-          track.stop();
+          track?.stop();
         });
       }
       setIsRecording(false);
-      videoRef.current.pause();
+      videoRef.current?.pause();
     }
   };
 
@@ -72,10 +72,11 @@ export const VideoRecorder = () => {
           vid: blob,
         },
       });
+
       setRecordedChunks(() => []);
     }
   }, [isRecording, recordedChunks]);
-  console.log(isPermission);
+
   return (
     <div className="videoRecorder">
       <video ref={videoRef} />
