@@ -37,7 +37,14 @@ export const RecordedVideoCard = ({ ...props }) => {
       <a href={URL.createObjectURL(props.vid)} download={`${props.title}.webm`}>
         <BsDownload />
       </a>
-      <button><RxCrossCircled  style={{backgroundColor:"var(--primary-color)"}}/></button>
+      <button>
+        <RxCrossCircled
+          style={{
+            backgroundColor: "var(--primary-color)",
+            borderRadius: "50%",
+          }}
+        />
+      </button>
     </div>
   );
 };
