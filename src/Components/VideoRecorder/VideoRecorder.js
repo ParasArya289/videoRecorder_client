@@ -9,6 +9,7 @@ export const VideoRecorder = () => {
   const mediaRecorderRef = useRef(null);
   const [isRecording, setIsRecording] = useState(false);
   const [recordedChunks, setRecordedChunks] = useState([]);
+  const [isPermission, setIsPermission] = useState(true);
 
   const videoRef = useRef(null);
 
@@ -20,6 +21,8 @@ export const VideoRecorder = () => {
   const startVideo = async () => {
     try {
       const stream = await navigator.mediaDevices.getUserMedia(constraints);
+      setIsPermission(true);
+      setIsRecording(true);
       let video = videoRef.current;
       video.srcObject = stream;
       video.play();
@@ -34,13 +37,13 @@ export const VideoRecorder = () => {
       mediaRecorderRef.current.start();
     } catch (err) {
       console.log(err);
+      setIsPermission(false);
     }
   };
 
   const toggleRecording = () => {
     if (!isRecording) {
-      startVideo(); // Automatically start the camera preview
-      setIsRecording(true);
+      startVideo();
       videoRef.current.play();
     } else {
       if (
@@ -72,46 +75,16 @@ export const VideoRecorder = () => {
       setRecordedChunks(() => []);
     }
   }, [isRecording, recordedChunks]);
-
-  useEffect(() => {
-    console.log(recordings);
-  }, [recordings]);
-
+  console.log(isPermission);
   return (
     <div className="videoRecorder">
       <video ref={videoRef} />
-
       <div className="controls" data-state={isRecording}>
         <button onClick={toggleRecording}>
           {isRecording ? <BsCameraVideoOff /> : <BsCameraVideo />}
         </button>
+        {!isPermission && <p>Grant access to camera</p>}
       </div>
-
-      {/* {recordedChunks.length > 0 && (
-        <div className="download">
-          <a
-            href={URL.createObjectURL(
-              new Blob(recordedChunks, {
-                mimeType: "video/webm;codecs=vp9,opus",
-              })
-            )}
-            download="recorded-video.webm"
-          >
-            Download Recorded Video
-          </a>
-          <video controls>
-            <source
-              src={URL.createObjectURL(
-                new Blob(recordedChunks, {
-                  mimeType: "video/webm;codecs=vp9,opus",
-                })
-              )}
-              type="video/webm"
-            />
-            Your browser does not support the video tag.
-          </video>
-        </div>
-      )} */}
     </div>
   );
 };
