@@ -12,8 +12,11 @@ export const Home = () => {
       <Navbar />
       Home
       <VideoRecorder />
-      <div className="recorded-videos">
-        {recordings.map((props, index) => (
+      <div
+        className="recorded-videos"
+        style={{ display: "flex", flexDirection: "row", gap: "20px",flexWrap:"wrap" }}
+      >
+        {recordings.map((props) => (
           <RecordedVideoCard key={props.id} {...props} />
         ))}
       </div>

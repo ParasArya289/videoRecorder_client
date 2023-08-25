@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
-import { flushSync } from "react-dom";
+import { BsCameraVideoOff, BsCameraVideo } from "react-icons/bs";
 import { useRecordings } from "../../Context/recordingContext";
+import "./VideoRecorder.css";
 
 const constraints = { video: { width: { max: 320 } }, audio: true };
 
@@ -79,11 +80,13 @@ export const VideoRecorder = () => {
   return (
     <div className="videoRecorder">
       <video ref={videoRef} />
+
       <div className="controls">
         <button onClick={toggleRecording}>
-          {isRecording ? "Stop Recording" : "Start Recording"}
+          {isRecording ? <BsCameraVideoOff /> : <BsCameraVideo />}
         </button>
       </div>
+
       {/* {recordedChunks.length > 0 && (
         <div className="download">
           <a
