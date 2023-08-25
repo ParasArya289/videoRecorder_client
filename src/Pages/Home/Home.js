@@ -13,8 +13,8 @@ export const Home = () => {
       Home
       <VideoRecorder />
       <div className="recorded-videos">
-        {recordings.map((blob, index) => (
-          <RecordedVideoCard key={index} blob={blob} index={index}/>
+        {recordings.map((props, index) => (
+          <RecordedVideoCard key={props.id} {...props} />
         ))}
       </div>
     </div>

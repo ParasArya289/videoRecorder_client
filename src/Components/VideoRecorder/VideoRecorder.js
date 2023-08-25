@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
+import { flushSync } from "react-dom";
 import { useRecordings } from "../../Context/recordingContext";
 
 const constraints = { video: { width: { max: 320 } }, audio: true };
@@ -25,7 +26,6 @@ export const VideoRecorder = () => {
       const mediaRecorder = new MediaRecorder(stream);
       mediaRecorder.ondataavailable = (event) => {
         if (event.data.size > 0) {
-          //   recordedChunks.current = [...recordedChunks.current, event.data];
           setRecordedChunks((prev) => [...prev, event.data]);
         }
       };
@@ -51,40 +51,31 @@ export const VideoRecorder = () => {
           track.stop();
         });
       }
-
       setIsRecording(false);
       videoRef.current.pause();
-      encodeAndStoreVideo();
-
-      // setRecordedChunks(() => []);
-      //   recordedChunks.current = [];
-    }
-  };
-  const encodeAndStoreVideo = () => {
-    if (recordedChunks.length > 0) {
-      const blob = new Blob(recordedChunks, { type: "video/webm" });
-      console.log(
-        new Blob(recordedChunks, { mimeType: "video/webm;codecs=vp9,opus" })
-      );
-      dispatchRecording({
-        type: "ADD_RECORDING",
-        payload: new Blob(recordedChunks, {
-          mimeType: "video/webm;codecs=vp9,opus",
-        }),
-      });
-      console.log(
-        URL.createObjectURL(
-          new Blob(recordedChunks, { mimeType: "video/webm;codecs=vp9,opus" })
-        )
-      );
-      setRecordedChunks(() => []);
-      //   recordedChunks.current = [];
     }
   };
 
   useEffect(() => {
+    if (!isRecording && recordedChunks.length > 0) {
+      const blob = new Blob(recordedChunks, {
+        mimeType: "video/webm;codecs=vp9,opus",
+      });
+      dispatchRecording({
+        type: "ADD_RECORDING",
+        payload: {
+          id: recordings.length,
+          vid: blob,
+        },
+      });
+      setRecordedChunks(() => []);
+    }
+  }, [isRecording, recordedChunks]);
+
+  useEffect(() => {
     console.log(recordings);
   }, [recordings]);
+
   return (
     <div className="videoRecorder">
       <video ref={videoRef} />
@@ -93,7 +84,7 @@ export const VideoRecorder = () => {
           {isRecording ? "Stop Recording" : "Start Recording"}
         </button>
       </div>
-      {recordedChunks.length > 0 && (
+      {/* {recordedChunks.length > 0 && (
         <div className="download">
           <a
             href={URL.createObjectURL(
@@ -117,7 +108,7 @@ export const VideoRecorder = () => {
             Your browser does not support the video tag.
           </video>
         </div>
-      )}
+      )} */}
     </div>
   );
 };

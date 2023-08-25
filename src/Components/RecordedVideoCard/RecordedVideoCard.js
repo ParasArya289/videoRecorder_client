@@ -1,8 +1,8 @@
-export const RecordedVideoCard = ({ blob, index }) => {
-    console.log(index)
+export const RecordedVideoCard = ({ ...props }) => {
+  console.log(props);
   return (
-    <video key={index} controls>
-      <source key={index} src={URL.createObjectURL(blob)} type="video/webm" />
+    <video controls>
+      <source src={URL.createObjectURL(props.vid)} type="video/webm" />
     </video>
   );
 };
