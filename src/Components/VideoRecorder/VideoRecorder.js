@@ -81,7 +81,7 @@ export const VideoRecorder = () => {
     <div className="videoRecorder">
       <video ref={videoRef} />
 
-      <div className="controls">
+      <div className="controls" data-state={isRecording}>
         <button onClick={toggleRecording}>
           {isRecording ? <BsCameraVideoOff /> : <BsCameraVideo />}
         </button>
