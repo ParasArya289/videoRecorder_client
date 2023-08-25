@@ -4,7 +4,7 @@ import "./RecordedVideoCard.css";
 
 export const RecordedVideoCard = ({ ...props }) => {
   const videoRef = useRef(null);
-  
+
   useEffect(() => {
     if (videoRef.current) {
       videoRef.current.currentTime = 0.5;
@@ -18,6 +18,9 @@ export const RecordedVideoCard = ({ ...props }) => {
   const handlePauseVideoOnMouseOver = () => {
     videoRef.current.pause();
   };
+  {
+    /* {recordedChunks.length > 0 && ( <div className="download"> <a href={URL.createObjectURL( new Blob(recordedChunks, { type: "video/webm", }) )} download="recorded-video.webm" > Download Recorded Video </a> <video controls> <source src={URL.createObjectURL( new Blob(recordedChunks, { mimeType: "video/webm;codecs=vp9,opus", }) )} type="video/webm" /> Your browser does not support the video tag. </video> </div> )} */
+  }
 
   return (
     <div className="videoCard">
@@ -33,9 +36,10 @@ export const RecordedVideoCard = ({ ...props }) => {
         </video>
         <span>{props.title}</span>
       </div>
-      <button>
+      <a href={URL.createObjectURL(props.vid)} download={`${props.title}.webm`}>
         <BsDownload />
-      </button>
+      </a>
+      {/* <button></button> */}
     </div>
   );
 };
