@@ -1,0 +1,19 @@
+.recording {
+  color: var(--secondary-text-color);
+  font-size: large;
+}
+.recording > video {
+  aspect-ratio: 16/9;
+  width: 100%;
+  background-color: black;
+}
+.recording > div {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.recording > div > a {
+  text-decoration: none;
+  color: inherit;
+  font-size: x-large;
+}
