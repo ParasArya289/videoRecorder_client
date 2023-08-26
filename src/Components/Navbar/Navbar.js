@@ -1,10 +1,12 @@
+import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../../Context/authContext";
 import "./Navbar.css";
 export const Navbar = () => {
   const { user, logoutUser } = useAuth();
+  const navigate = useNavigate();
   return (
     <nav className="navbar">
-      <h4>Video Recorder</h4>
+      <Link to="/">Video Recorder</Link>
       <div>
         <span>Welcome, {user?.username}</span>{" "}
         <button onClick={logoutUser}>Logout</button>

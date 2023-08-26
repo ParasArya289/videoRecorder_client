@@ -2,9 +2,11 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  /* padding-inline: 20px; */
+  padding-block: 20px;
 }
-.navbar > h4 {
+.navbar > a {
+  text-decoration: none;
+  font-weight: var(--fw-medium);
   color: var(--accent-color);
 }
 .navbar >div{

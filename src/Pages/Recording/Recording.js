@@ -2,6 +2,7 @@ import { useParams } from "react-router-dom";
 import { useRecordings } from "../../Context/recordingContext";
 import { BsDownload } from "react-icons/bs";
 import "./Recording.css";
+import { Navbar } from "../../Components/Navbar/Navbar";
 
 export const Recording = () => {
   const { recordingId } = useParams();
@@ -14,6 +15,7 @@ export const Recording = () => {
 
   return (
     <div className="recording">
+      <Navbar />
       <video controls>
         <source
           src={URL.createObjectURL(foundRecording.vid)}
