@@ -1,10 +1,13 @@
 import { useEffect, useRef } from "react";
 import { BsDownload } from "react-icons/bs";
 import { RxCrossCircled } from "react-icons/rx";
+import { useNavigate } from "react-router-dom";
 import "./RecordedVideoCard.css";
 
 export const RecordedVideoCard = ({ ...props }) => {
   const videoRef = useRef(null);
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (videoRef.current) {
@@ -20,7 +23,10 @@ export const RecordedVideoCard = ({ ...props }) => {
   };
 
   return (
-    <div className="videoCard">
+    <div
+      className="videoCard"
+      onClick={() => navigate("/recording/" + props.id)}
+    >
       <div>
         <video
           ref={videoRef}
@@ -33,7 +39,11 @@ export const RecordedVideoCard = ({ ...props }) => {
         </video>
         <span>{props.title}</span>
       </div>
-      <a href={URL.createObjectURL(props.vid)} download={`${props.title}.webm`}>
+      <a
+        href={URL.createObjectURL(props.vid)}
+        download={`${props.title}.webm`}
+        onClick={(e) => e.stopPropagation()}
+      >
         <BsDownload />
       </a>
       <button>
