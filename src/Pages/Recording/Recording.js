@@ -14,32 +14,34 @@ export const Recording = () => {
   const foundRecording = recordings.find(({ id }) => id == recordingId);
 
   return (
-    <div className="recording">
+    <>
       <Navbar />
-      <video controls>
-        <source
-          src={URL.createObjectURL(foundRecording.vid)}
-          type="video/webm"
-        />
-      </video>
-      <div>
+      <div className="recording">
+        <video controls>
+          <source
+            src={URL.createObjectURL(foundRecording.vid)}
+            type="video/webm"
+          />
+        </video>
         <div>
-          <span>{foundRecording.title}</span>
-          <span>
-            {new Intl.DateTimeFormat("en-US", {
-              dateStyle: "short",
-              timeStyle: "short",
-            }).format(foundRecording.date)}
-          </span>
+          <div>
+            <span>{foundRecording.title}</span>
+            <span>
+              {new Intl.DateTimeFormat("en-US", {
+                dateStyle: "short",
+                timeStyle: "short",
+              }).format(foundRecording.date)}
+            </span>
+          </div>
+          <a
+            href={URL.createObjectURL(foundRecording.vid)}
+            download={`${foundRecording.title}.webm`}
+            onClick={(e) => e.stopPropagation()}
+          >
+            <BsDownload />
+          </a>
         </div>
-        <a
-          href={URL.createObjectURL(foundRecording.vid)}
-          download={`${foundRecording.title}.webm`}
-          onClick={(e) => e.stopPropagation()}
-        >
-          <BsDownload />
-        </a>
       </div>
-    </div>
+    </>
   );
 };
