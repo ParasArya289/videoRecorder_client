@@ -8,7 +8,7 @@ export const RecordedVideoCard = ({ ...props }) => {
   const videoRef = useRef(null);
 
   const navigate = useNavigate();
-
+  
   useEffect(() => {
     if (videoRef.current) {
       videoRef.current.currentTime = 0.5;
@@ -31,7 +31,6 @@ export const RecordedVideoCard = ({ ...props }) => {
         <video
           ref={videoRef}
           muted
-          currentTime="1"
           onMouseOver={handlePlayVideoOnMouseOver}
           onMouseLeave={handlePauseVideoOnMouseOver}
         >
