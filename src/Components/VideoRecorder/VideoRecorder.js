@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import { BsCameraVideoOff, BsCameraVideo } from "react-icons/bs";
+import { v4 as uuid } from "uuid";
 import { useRecordings } from "../../Context/recordingContext";
 import "./VideoRecorder.css";
 
@@ -68,8 +69,8 @@ export const VideoRecorder = () => {
       dispatchRecording({
         type: "ADD_RECORDING",
         payload: {
-          id: recordings.length,
-          title: `VIDEO-${recordings.length+1}`,
+          id: uuid(),
+          title: `Recording-${recordings.length + 1}`,
           vid: blob,
         },
       });
