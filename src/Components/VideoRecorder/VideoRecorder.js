@@ -71,6 +71,7 @@ export const VideoRecorder = () => {
         payload: {
           id: uuid(),
           title: `Recording-${recordings.length + 1}`,
+          date: new Date(),
           vid: blob,
         },
       });

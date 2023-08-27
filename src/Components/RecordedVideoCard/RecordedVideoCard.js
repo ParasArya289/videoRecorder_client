@@ -8,7 +8,7 @@ export const RecordedVideoCard = ({ ...props }) => {
   const videoRef = useRef(null);
 
   const navigate = useNavigate();
-  
+
   useEffect(() => {
     if (videoRef.current) {
       videoRef.current.currentTime = 0.5;
@@ -36,7 +36,16 @@ export const RecordedVideoCard = ({ ...props }) => {
         >
           <source src={URL.createObjectURL(props.vid)} type="video/webm" />
         </video>
-        <span>{props.title}</span>
+        <div>
+          <span>{props.title}</span>
+          <br />
+          <span>
+            {new Intl.DateTimeFormat("en-US", {
+              dateStyle: "short",
+              timeStyle: "short",
+            }).format(props.date)}
+          </span>
+        </div>
       </div>
       <a
         href={URL.createObjectURL(props.vid)}

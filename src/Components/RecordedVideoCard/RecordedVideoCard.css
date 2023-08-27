@@ -15,6 +15,9 @@
   font-weight: var(--fw-medium);
   gap: 20px;
 }
+.videoCard span:last-of-type{
+  font-size: smaller;
+}
 .videoCard video {
   width: 40%;
   height: auto;

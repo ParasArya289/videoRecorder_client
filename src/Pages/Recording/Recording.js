@@ -23,7 +23,15 @@ export const Recording = () => {
         />
       </video>
       <div>
-        <p>{foundRecording.title}</p>
+        <div>
+          <span>{foundRecording.title}</span>
+          <span>
+            {new Intl.DateTimeFormat("en-US", {
+              dateStyle: "short",
+              timeStyle: "short",
+            }).format(foundRecording.date)}
+          </span>
+        </div>
         <a
           href={URL.createObjectURL(foundRecording.vid)}
           download={`${foundRecording.title}.webm`}
