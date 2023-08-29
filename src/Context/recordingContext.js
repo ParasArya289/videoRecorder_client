@@ -11,6 +11,8 @@ export const RecordingContextProvider = ({ children }) => {
     recordingReducer,
     initState
   );
+
+//store video to local storage for specific user
   return (
     <recordingsContext.Provider value={{ recordings, dispatchRecording }}>
       {children}
