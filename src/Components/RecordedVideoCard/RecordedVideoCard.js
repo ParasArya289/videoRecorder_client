@@ -2,9 +2,11 @@ import { useEffect, useRef } from "react";
 import { BsDownload } from "react-icons/bs";
 import { RxCrossCircled } from "react-icons/rx";
 import { useNavigate } from "react-router-dom";
+import { useRecordings } from "../../Context/recordingContext";
 import "./RecordedVideoCard.css";
 
 export const RecordedVideoCard = ({ ...props }) => {
+  const { dispatchRecording } = useRecordings();
   const videoRef = useRef(null);
 
   const navigate = useNavigate();
@@ -20,6 +22,11 @@ export const RecordedVideoCard = ({ ...props }) => {
   };
   const handlePauseVideoOnMouseOver = () => {
     videoRef.current.pause();
+  };
+
+  const deleteRecordingHandler = (e) => {
+    e.stopPropagation();
+    dispatchRecording({ type: "DELETE_RECORDING", payload: { id: props.id } });
   };
 
   return (
@@ -54,7 +61,7 @@ export const RecordedVideoCard = ({ ...props }) => {
       >
         <BsDownload />
       </a>
-      <button>
+      <button onClick={deleteRecordingHandler}>
         <RxCrossCircled
           style={{
             backgroundColor: "var(--primary-color)",
