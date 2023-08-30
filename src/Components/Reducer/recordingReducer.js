@@ -14,7 +14,14 @@ export const recordingReducer = (state, action) => {
         ...state,
         recordings: [action.payload, ...state.recordings],
       };
-    
+
+    case "DELETE_RECORDING":
+      return {
+        ...state,
+        recordings: state.recordings.filter(
+          ({ id }) => id !== action.payload.id
+        ),
+      };
     default:
       return state;
   }
