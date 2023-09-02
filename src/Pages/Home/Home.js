@@ -8,6 +8,7 @@ export const Home = () => {
   const {
     recordings: { recordings },
   } = useRecordings();
+  //try implementing view transistion api
   return (
     <div>
       <Navbar />
